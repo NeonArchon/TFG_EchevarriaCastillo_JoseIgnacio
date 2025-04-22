@@ -14,21 +14,22 @@
         android:layout_width="190dp"
         android:layout_height="204dp"
         android:layout_marginBottom="36dp"
-        app:layout_constraintBottom_toTopOf="@+id/view2"
+        app:layout_constraintBottom_toTopOf="@+id/viewfondo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.69"
-        app:srcCompat="@drawable/Logo" />
+        app:srcCompat="@drawable/logo" />
 
     <View
-        android:id="@+id/view2"
+        android:id="@+id/viewfondo"
         android:layout_width="410dp"
-        android:layout_height="320dp"
-        android:background="@color/white"
+        android:layout_height="300dp"
+        android:background="@drawable/borde_redondo_view"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="1dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <androidx.cardview.widget.CardView
@@ -36,10 +37,11 @@
         android:layout_width="412dp"
         android:layout_height="290dp"
         app:cardBackgroundColor="#DA5AA7"
+        app:cardCornerRadius="35dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/view2">
+        app:layout_constraintStart_toStartOf="@+id/viewfondo">
 
 
 
