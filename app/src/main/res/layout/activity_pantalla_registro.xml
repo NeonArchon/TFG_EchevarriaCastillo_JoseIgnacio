@@ -28,19 +28,18 @@
     <View
         android:id="@+id/viewfondo"
         android:layout_width="410dp"
-        android:layout_height="580dp"
+        android:layout_height="585dp"
         android:background="@drawable/borde_redondo_view"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-
 
         />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
         android:layout_width="412dp"
-        android:layout_height="550dp"
+        android:layout_height="560dp"
         app:cardBackgroundColor="#DA5AA7"
         app:cardCornerRadius="35dp"
 
@@ -52,9 +51,14 @@
         app:layout_constraintVertical_bias="0.911">
 
         <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp">
+            android:layout_width="391dp"
+            android:layout_height="540dp"
+            android:background="@drawable/fondo_formulario"
+            android:padding="13dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="6dp"
+
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -63,84 +67,120 @@
 
                 <!-- Campos de texto -->
                 <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:hint="Nombre *"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName"/>
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    android:padding="12dp" />
 
                 <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:hint="Apellidos *"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName"/>
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    android:padding="12dp" />
 
                 <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:hint="Nombre de Usuario *"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName"/>
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    android:padding="12dp" />
 
                 <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:hint="E-mail *"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"/>
+                    android:inputType="textEmailAddress"
+                    android:minHeight="48dp"
+                    android:padding="12dp" />
 
                 <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:hint="Fecha de Nacimiento *"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="date"/>
+                    android:inputType="date"
+                    android:minHeight="48dp"
+                    android:padding="12dp" />
 
                 <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:hint="Contraseña"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword"/>
+                    android:inputType="textPassword"
+                    android:minHeight="48dp"
+                    android:padding="12dp" />
 
                 <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:hint="Confirmar Contraseña"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword"/>
+                    android:inputType="textPassword"
+                    android:minHeight="48dp"
+                    android:padding="12dp" />
 
                 <EditText
-                    android:hint="Codigo Admin (solo si aplica)"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"/>
+                    android:hint="Codigo Admin (solo si aplica)"
+                    android:inputType="text"
+                    android:minHeight="48dp"
+                    android:padding="12dp" />
 
                 <!-- RadioGroup Sexo -->
                 <TextView
-                    android:text="Sexo"
-                    android:textSize="16sp"
+                    android:layout_width="46dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="160dp"
                     android:layout_marginTop="8dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:text="Sexo"
+                    android:textSize="16sp" />
 
                 <RadioGroup
-                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginHorizontal="35dp"
+                    >
 
-                    <RadioButton android:text="Masculino"
-                        android:id="@+id/radio_masculino"/>
-                    <RadioButton android:text="Femenino"
-                        android:id="@+id/radio_femenino"/>
-                    <RadioButton android:text="Otro"
-                        android:id="@+id/radio_otro"/>
+                    <RadioButton
+                        android:id="@+id/radio_masculino"
+                        android:text="Masculino"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+
+                    <RadioButton
+                        android:id="@+id/radio_femenino"
+                        android:text="Femenino"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        />
+
+                    <RadioButton
+                        android:id="@+id/radio_otro"
+                        android:text="Otro"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
                 </RadioGroup>
 
                 <!-- Botón de registro -->
                 <Button
                     android:id="@+id/btnRegistrar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginHorizontal="75dp"
+                    app:backgroundTint="#07CF78"
                     android:text="Registrarse"
-                    android:textColor="#FFFFFF"
-                    android:background="#00D283"
-                    android:textStyle="bold"
-                    android:layout_marginTop="16dp"/>
+                    android:textColor="#ffffff"
+                    android:textStyle="bold" />
 
             </LinearLayout>
         </ScrollView>
