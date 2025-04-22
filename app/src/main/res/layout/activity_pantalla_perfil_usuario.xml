@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#50DAF9"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:id="@+id/NomnreAap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Planeta Maqueta"
+        android:textColor="#DA2C49"
+        android:fontFamily="serif"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.185" />
+
+
+    <View
+        android:id="@+id/viewfondo"
+        android:layout_width="410dp"
+        android:layout_height="580dp"
+        android:background="@drawable/borde_redondo_view"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+
+        />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="412dp"
+        android:layout_height="550dp"
+        app:cardBackgroundColor="#DA5AA7"
+        app:cardCornerRadius="35dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/viewfondo"
+        app:layout_constraintTop_toTopOf="@+id/NomnreAap"
+        app:layout_constraintVertical_bias="0.911">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Campos de texto -->
+                <EditText
+                    android:hint="Nombre *"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"/>
+
+                <EditText
+                    android:hint="Apellidos *"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"/>
+
+                <EditText
+                    android:hint="Nombre de Usuario *"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"/>
+
+                <EditText
+                    android:hint="E-mail *"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"/>
+
+                <EditText
+                    android:hint="Fecha de Nacimiento *"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="date"/>
+
+                <EditText
+                    android:hint="Contraseña"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"/>
+
+                <EditText
+                    android:hint="Confirmar Contraseña"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"/>
+
+                <EditText
+                    android:hint="Codigo Admin (solo si aplica)"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"/>
+
+                <!-- RadioGroup Sexo -->
+                <TextView
+                    android:text="Sexo"
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <RadioGroup
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton android:text="Masculino"
+                        android:id="@+id/radio_masculino"/>
+                    <RadioButton android:text="Femenino"
+                        android:id="@+id/radio_femenino"/>
+                    <RadioButton android:text="Otro"
+                        android:id="@+id/radio_otro"/>
+                </RadioGroup>
+
+                <!-- Botón de registro -->
+                <Button
+                    android:id="@+id/btnRegistrar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Registrarse"
+                    android:textColor="#FFFFFF"
+                    android:background="#00D283"
+                    android:textStyle="bold"
+                    android:layout_marginTop="16dp"/>
+
+            </LinearLayout>
+        </ScrollView>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

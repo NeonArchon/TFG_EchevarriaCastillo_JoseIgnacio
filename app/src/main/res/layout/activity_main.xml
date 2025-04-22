@@ -25,7 +25,7 @@
     <View
         android:id="@+id/viewfondo"
         android:layout_width="410dp"
-        android:layout_height="300dp"
+        android:layout_height="340dp"
         android:background="@drawable/borde_redondo_view"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +35,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
         android:layout_width="412dp"
-        android:layout_height="290dp"
+        android:layout_height="320dp"
         app:cardBackgroundColor="#DA5AA7"
         app:cardCornerRadius="35dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -69,13 +69,6 @@
             tools:layout_editor_absoluteY="120dp"
             tools:layout_marginLeft="15dp"
             tools:layout_marginTop="205dp" />
-
-
-
-        <View
-            android:id="@+id/view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
 
 
         <EditText
@@ -122,6 +115,14 @@
             android:ems="10"
             android:inputType="textPassword" />
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            tools:layout_marginTop="280dp"
+            tools:layout_marginLeft="100dp"
+            android:text="No Tienes Cuenta? Registrate" />
 
 
     </androidx.cardview.widget.CardView>
