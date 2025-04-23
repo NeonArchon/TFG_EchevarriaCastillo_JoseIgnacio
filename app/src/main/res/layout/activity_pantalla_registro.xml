@@ -13,17 +13,16 @@
         android:id="@+id/NomnreAap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:fontFamily="serif"
         android:text="Planeta Maqueta"
         android:textColor="#DA2C49"
-        android:fontFamily="serif"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.185" />
-
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/viewfondo"
