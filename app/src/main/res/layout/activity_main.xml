@@ -43,87 +43,94 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/viewfondo">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="188dp"
+                android:layout_height="60dp"
+                android:hint="E-Mail"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                app:backgroundTint="@color/white"
+                android:background="@drawable/borde_redondo_texto"
+                android:inputType="textEmailAddress"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="10dp"/>
 
-        <Button
-            android:id="@+id/boton_EntradaAdmin"
-            android:layout_width="189dp"
-            android:layout_height="60dp"
-            android:text="Como admin"
-            android:textColor="@color/white"
-            app:backgroundTint="#4B4A4A"
-            tools:layout_editor_absoluteY="120dp"
-            tools:layout_marginLeft="215dp"
-            tools:layout_marginTop="205dp" />
+            <EditText
+                android:id="@+id/Contrasena"
+                android:layout_width="189dp"
+                android:layout_height="60dp"
+                android:hint="Contraseña"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                app:backgroundTint="@color/white"
+                android:background="@drawable/borde_redondo_texto"
+                android:ems="10"
+                android:inputType="textPassword"
+                app:layout_constraintTop_toBottomOf="@id/email"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="10dp"/>
 
+            <EditText
+                android:id="@+id/Contrasenaadmin"
+                android:layout_width="189dp"
+                android:layout_height="60dp"
+                android:hint="Cod. Admin"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                app:backgroundTint="@color/white"
+                android:background="@drawable/borde_redondo_texto"
+                android:ems="10"
+                android:inputType="textPassword"
+                app:layout_constraintTop_toBottomOf="@id/Contrasena"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="10dp"/>
 
-        <Button
-            android:id="@+id/boton_EntradaUsuario"
-            android:layout_width="189dp"
-            android:layout_height="60dp"
-            android:hint="Contraseña"
-            android:text="Entrar"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            app:backgroundTint="#07CF78"
-            tools:layout_editor_absoluteY="120dp"
-            tools:layout_marginLeft="15dp"
-            tools:layout_marginTop="205dp" />
+            <Button
+                android:id="@+id/boton_EntradaUsuario"
+                android:layout_width="189dp"
+                android:layout_height="60dp"
+                android:text="Entrar"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                app:backgroundTint="#07CF78"
+                app:layout_constraintTop_toBottomOf="@id/Contrasenaadmin"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"/>
 
+            <Button
+                android:id="@+id/boton_EntradaAdmin"
+                android:layout_width="189dp"
+                android:layout_height="60dp"
+                android:text="Como admin"
+                android:textColor="@color/white"
+                app:backgroundTint="#4B4A4A"
+                app:layout_constraintTop_toBottomOf="@id/Contrasenaadmin"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="15dp"/>
 
-        <EditText
-            android:id="@+id/Contrasena"
-            android:layout_width="189dp"
-            android:layout_height="60dp"
-            android:hint="Contraseña"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            app:backgroundTint="@color/white"
-            tools:layout_editor_absoluteY="120dp"
-            tools:layout_marginLeft="100dp"
-            tools:layout_marginTop="75dp"
-            android:background="@drawable/borde_redondo_texto"
-            android:ems="10"
-            android:inputType="textPassword" />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No Tienes Cuenta? Registrate"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginBottom="10dp"/>
 
-        <EditText
-            android:id="@+id/email"
-            android:layout_width="188dp"
-            android:layout_height="60dp"
-            android:hint="E-Mail"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            app:backgroundTint="@color/white"
-            android:background="@drawable/borde_redondo_texto"
-            tools:layout_editor_absoluteY="116dp"
-            tools:layout_marginLeft="100dp"
-            tools:layout_marginTop="10dp"
-            android:inputType="textEmailAddress" />
-
-        <EditText
-            android:id="@+id/Contrasenaadmin"
-            android:layout_width="189dp"
-            android:layout_height="60dp"
-            android:hint="Cod. Admin"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            app:backgroundTint="@color/white"
-            tools:layout_editor_absoluteY="120dp"
-            tools:layout_marginLeft="100dp"
-            tools:layout_marginTop="140dp"
-            android:background="@drawable/borde_redondo_texto"
-            android:ems="10"
-            android:inputType="textPassword" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            tools:layout_marginTop="280dp"
-            tools:layout_marginLeft="100dp"
-            android:text="No Tienes Cuenta? Registrate" />
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 

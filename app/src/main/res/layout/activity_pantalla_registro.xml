@@ -13,7 +13,7 @@
         android:id="@+id/NomnreAap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="28dp"
         android:fontFamily="serif"
         android:text="Planeta Maqueta"
         android:textColor="#DA2C49"
@@ -26,9 +26,10 @@
 
     <View
         android:id="@+id/viewfondo"
-        android:layout_width="410dp"
-        android:layout_height="585dp"
+        android:layout_width="420dp"
+        android:layout_height="630dp"
         android:background="@drawable/borde_redondo_view"
+        android:layout_marginBottom="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,21 +38,21 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
-        android:layout_width="412dp"
-        android:layout_height="560dp"
+        android:layout_width="413dp"
+        android:layout_height="610dp"
         app:cardBackgroundColor="#DA5AA7"
         app:cardCornerRadius="35dp"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/viewfondo"
-        app:layout_constraintTop_toTopOf="@+id/NomnreAap"
-        app:layout_constraintVertical_bias="0.911">
+        app:layout_constraintTop_toBottomOf="@+id/NomnreAap"
+        app:layout_constraintVertical_bias="0.5">
+
 
         <ScrollView
             android:layout_width="391dp"
-            android:layout_height="540dp"
+            android:layout_height="590dp"
             android:background="@drawable/fondo_formulario"
             android:padding="13dp"
             android:layout_marginLeft="10dp"
@@ -65,6 +66,15 @@
                 android:orientation="vertical">
 
                 <!-- Campos de texto -->
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="DNI *"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    android:padding="12dp" />
+
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -108,7 +118,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Contraseña"
+                    android:hint="Direccion"
                     android:inputType="textPassword"
                     android:minHeight="48dp"
                     android:padding="12dp" />
@@ -116,7 +126,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Confirmar Contraseña"
+                    android:hint="Contraseña"
                     android:inputType="textPassword"
                     android:minHeight="48dp"
                     android:padding="12dp" />

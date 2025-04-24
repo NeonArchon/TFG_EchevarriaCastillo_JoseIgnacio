@@ -119,32 +119,38 @@
                     <!-- Botón Mi carrito -->
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnCarrito"
-                        style="@style/IconButtonStyle"
+
                         android:layout_width="2dp"
                         android:layout_height="55dp"
                         android:layout_weight="1"
-                        android:text="Mi carrito"
-                        android:drawableTop="@drawable/ic_carrito"/>
+                        android:text="Mi carrito">
+
+                    </androidx.appcompat.widget.AppCompatButton>
+
 
                     <!-- Botón Mi Wishlist -->
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnWishlist"
-                        style="@style/IconButtonStyle"
+
                         android:layout_width="2dp"
                         android:layout_height="55dp"
                         android:layout_weight="1"
-                        android:text="Mi Wishlist"
-                        android:drawableTop="@drawable/ic_wishlist"/>
+                        android:text="Mi Wishlist">
+
+                    </androidx.appcompat.widget.AppCompatButton>
+
 
                     <!-- Botón Vender Producto -->
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnVender"
-                        style="@style/IconButtonStyle"
+
                         android:layout_width="2dp"
                         android:layout_height="55dp"
                         android:layout_weight="1"
-                        android:text="Vender Producto"
-                        android:drawableTop="@drawable/ic_vender"/>
+                        android:text="Vender Producto">
+
+                    </androidx.appcompat.widget.AppCompatButton>
+
                 </LinearLayout>
 
             </LinearLayout>
