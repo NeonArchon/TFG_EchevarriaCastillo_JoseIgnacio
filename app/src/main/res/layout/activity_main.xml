@@ -8,7 +8,6 @@
     android:background="#50DAF9"
     tools:context=".MainActivity">
 
-
     <ImageView
         android:id="@+id/Logo"
         android:layout_width="190dp"
