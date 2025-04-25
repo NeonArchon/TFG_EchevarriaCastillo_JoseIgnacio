@@ -15,10 +15,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        Log.i("******************************", "ERROR")
+        Log.i("DataBaseHelper", "Base de datos inicializada correctamente")
 
         // Inicializar la base de datos
         dbHelper = DataBaseHelper(this)
+        dbHelper.writableDatabase // <- Esto dispara la creación si aún no existe
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
