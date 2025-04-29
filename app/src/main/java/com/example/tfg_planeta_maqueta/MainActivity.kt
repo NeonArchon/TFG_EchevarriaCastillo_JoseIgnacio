@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
             val email = emailEditText.text.toString()
             val contrasena = contrasenaEditText.text.toString()
 
-            if (dbHelper.verificarUsuario(email, contrasena)) {
+            if (dbHelper.validarUsuario(email, contrasena)) {
                 Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
                 // startActivity(Intent(this, PantallaUsuario::class.java))
             } else {
@@ -46,9 +46,10 @@ class MainActivity : AppCompatActivity() {
         botonAdmin.setOnClickListener {
             val email = emailEditText.text.toString()
             val contrasena = contrasenaEditText.text.toString()
-            val codigoAdmin = codigoAdminEditText.text.toString()
+            val Cod_AdministradorTxt = codigoAdminEditText.text.toString();
 
-            if (dbHelper.verificarAdmin(email, contrasena, codigoAdmin)) {
+            val Cod_Administrador = Cod_AdministradorTxt.toInt();
+            if (dbHelper.validarAdministrador(email, contrasena, Cod_Administrador)) {
                 Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
                 // startActivity(Intent(this, PantallaAdmin::class.java))
             } else {
@@ -59,7 +60,9 @@ class MainActivity : AppCompatActivity() {
         textViewRegistro.setOnClickListener {
             val intent = Intent(this, PantallaRegistro::class.java)
             startActivity(intent)
+
         }
+
     }
 
 }
