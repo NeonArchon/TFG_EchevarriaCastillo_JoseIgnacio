@@ -188,29 +188,27 @@ class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpen
         return db.insert("Productos", null, values)
     }
 
-    // Validar usuario (ahora con DNI y contraseña)
-    fun validarUsuario(dni: String, contrasena: String): Boolean {
+    fun validarUsuario(email: String, contrasena: String): Boolean {
         val db = this.readableDatabase
         val query = """
         SELECT * FROM Usuario 
         WHERE DNI = ? AND Contrasena = ?
     """.trimIndent()
 
-        val cursor = db.rawQuery(query, arrayOf(dni, contrasena))
+        val cursor = db.rawQuery(query, arrayOf(email, contrasena))
         val result = cursor.count > 0
         cursor.close()
         return result
     }
 
-    // Validar administrador (ahora con DNI, contraseña y código)
-    fun validarAdministrador(dni: String, contrasena: String, codAdmin: Int): Boolean {
+    fun validarAdministrador(email: String, contrasena: String, codAdmin: Int): Boolean {
         val db = this.readableDatabase
         val query = """
         SELECT * FROM Administrador 
         WHERE DNI = ? AND Contrasena = ? AND Cod_Administrador = ?
     """.trimIndent()
 
-        val cursor = db.rawQuery(query, arrayOf(dni, contrasena, codAdmin.toString()))
+        val cursor = db.rawQuery(query, arrayOf(email, contrasena, codAdmin.toString()))
         val result = cursor.count > 0
         cursor.close()
         return result
@@ -269,5 +267,7 @@ class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpen
         val dbHelper = DataBaseHelper(context)  // Pasamos el contexto recibido
         return dbHelper.validarAdministrador(dni, contrasena, codAdmin)
     }
+
+
 
 }

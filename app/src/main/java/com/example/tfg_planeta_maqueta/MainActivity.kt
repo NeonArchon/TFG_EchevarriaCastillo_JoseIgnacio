@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var dbHelper: DataBaseHelper
     private lateinit var emailEditText: EditText
     private lateinit var contrasenaEditText: EditText
@@ -21,9 +22,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        dbHelper = DataBaseHelper(this)
-        dbHelper.writableDatabase
-
+        // Inicialización de vistas
         emailEditText = findViewById(R.id.email)
         contrasenaEditText = findViewById(R.id.Contrasena)
         codigoAdminEditText = findViewById(R.id.Contrasenaadmin)
@@ -31,38 +30,138 @@ class MainActivity : AppCompatActivity() {
         botonAdmin = findViewById(R.id.boton_EntradaAdmin)
         textViewRegistro = findViewById(R.id.linkregistro)
 
+        // Inicialización de la base de datos
+        dbHelper = DataBaseHelper(this)
+
+        // Insertar datos de prueba (solo para desarrollo)
+        insertarDatosPrueba()
+
+        // Configurar listeners
+        configurarListeners()
+    }
+
+    private fun insertarDatosPrueba() {
+        // Usuario de prueba
+        dbHelper.insertarUsuario(
+            dni = "usuario@test.com", // Usamos el email como DNI para este caso
+            nombre = "Usuario",
+            apellidos = "Prueba",
+            edad = 25,
+            direccion = "Calle Prueba 123",
+            fechaNacimiento = "1998-01-01",
+            contrasena = "123456"
+        )
+
+        // Administrador de prueba
+        dbHelper.insertarAdministrador(
+            dni = "admin@test.com",
+            nombre = "Admin",
+            apellidos = "Prueba",
+            codAdministrador = 9999,
+            edad = 30,
+            direccion = "Calle Admin 456",
+            fechaNacimiento = "1993-01-01",
+            contrasena = "admin123"
+        )
+    }
+
+    private fun configurarListeners() {
+        // Login de usuario normal
         botonUsuario.setOnClickListener {
-            val email = emailEditText.text.toString()
-            val contrasena = contrasenaEditText.text.toString()
+            val email = emailEditText.text.toString().trim()
+            val contrasena = contrasenaEditText.text.toString().trim()
 
-            if (dbHelper.validarUsuario(email, contrasena)) {
-                Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
-                // startActivity(Intent(this, PantallaUsuario::class.java))
-            } else {
-                Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
+            if (validarCamposUsuario(email, contrasena)) {
+                if (dbHelper.validarUsuario(email, contrasena)) {
+                    iniciarSesionUsuario()
+                } else {
+                    mostrarError("Credenciales incorrectas")
+                }
             }
         }
 
+        // Login de administrador
         botonAdmin.setOnClickListener {
-            val email = emailEditText.text.toString()
-            val contrasena = contrasenaEditText.text.toString()
-            val Cod_AdministradorTxt = codigoAdminEditText.text.toString();
+            val email = emailEditText.text.toString().trim()
+            val contrasena = contrasenaEditText.text.toString().trim()
+            val codigoAdmin = codigoAdminEditText.text.toString().trim()
 
-            val Cod_Administrador = Cod_AdministradorTxt.toInt();
-            if (dbHelper.validarAdministrador(email, contrasena, Cod_Administrador)) {
-                Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
-                // startActivity(Intent(this, PantallaAdmin::class.java))
-            } else {
-                Toast.makeText(this, "Credenciales o código incorrectos", Toast.LENGTH_SHORT).show()
+            if (validarCamposAdmin(email, contrasena, codigoAdmin)) {
+                try {
+                    val codigo = codigoAdmin.toInt()
+                    if (dbHelper.validarAdministrador(email, contrasena, codigo)) {
+                        iniciarSesionAdmin()
+                    } else {
+                        mostrarError("Credenciales o código incorrectos")
+                    }
+                } catch (e: NumberFormatException) {
+                    mostrarError("El código de administrador debe ser numérico")
+                }
             }
         }
 
+        // Registro de nuevo usuario
         textViewRegistro.setOnClickListener {
-            val intent = Intent(this, PantallaRegistro::class.java)
-            startActivity(intent)
-
+            startActivity(Intent(this, PantallaRegistro::class.java))
         }
+    }
 
+    private fun validarCamposUsuario(email: String, contrasena: String): Boolean {
+        return when {
+            email.isEmpty() -> {
+                mostrarError("Ingrese su email")
+                false
+            }
+            contrasena.isEmpty() -> {
+                mostrarError("Ingrese su contraseña")
+                false
+            }
+            else -> true
+        }
+    }
+
+    private fun validarCamposAdmin(email: String, contrasena: String, codigo: String): Boolean {
+        return when {
+            email.isEmpty() -> {
+                mostrarError("Ingrese su email")
+                false
+            }
+            contrasena.isEmpty() -> {
+                mostrarError("Ingrese su contraseña")
+                false
+            }
+            codigo.isEmpty() -> {
+                mostrarError("Ingrese el código de administrador")
+                false
+            }
+            else -> true
+        }
+    }
+
+
+
+    private fun iniciarSesionUsuario() {
+        Toast.makeText(this, "Bienvenido Usuario", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, PantallaUsuario::class.java).apply {
+            putExtra("EMAIL", emailEditText.text.toString())
+        }
+        startActivity(intent)
+        finish()
+    }
+
+    private fun iniciarSesionAdmin() {
+        Toast.makeText(this, "Bienvenido Administrador", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, PantallaAdministrador::class.java).apply {
+            putExtra("EMAIL", emailEditText.text.toString())
+        }
+        startActivity(intent)
+        finish()
+    }
+
+
+
+    private fun mostrarError(mensaje: String) {
+        Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
     }
 
 }
