@@ -83,8 +83,9 @@ class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpen
                     )
                 """.trimIndent())
 
-                // Marcar la transacción como exitosa
-                Log.i("DataBaseHelper", "Tablas creadas exitosamente")
+
+            }catch(e: Exception){
+                Log.i("DataBaseHelper", "FALLO INSERCCION");
             } catch (e: Exception) {
                 Log.i("DatabaseHelper", "Error al crear tablas: ${e.message}")
             }
@@ -106,6 +107,8 @@ class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpen
                 database.execSQL("DROP TABLE IF EXISTS Vende")
 
                 onCreate(database)
+                insertarDatosPrueba();
+
             } catch (e: Exception) {
                 Log.e("DatabaseHelper", "Error en onUpgrade: ${e.message}")
             }
@@ -136,6 +139,8 @@ class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpen
         }
         return db.insert("Usuario", null, values)
     }
+
+
 
     // Insertar un nuevo administrador
     fun insertarAdministrador(
@@ -231,33 +236,29 @@ class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpen
     }
 
 
-    // Insertar usuario de prueba
-    fun insertarUsuarioPrueba(context: Context) {
-        val dbHelper = DataBaseHelper(context)
-        dbHelper.insertarUsuario(
-            dni = "11111111A",
+    // Insertar usuario y administrador de prueba
+    fun insertarDatosPrueba( ) {
+        insertarUsuario(
+
+            dni = "12345678A",
             nombre = "Usuario",
             apellidos = "Prueba",
             email = "usuario@test.com",
             edad = 25,
-            direccion = "Dirección prueba",
+            direccion = "Calle Prueba 123",
             fechaNacimiento = "1998-01-01",
-            contrasena = "usuario123"
+            contrasena = "password123"
         )
-    }
 
-    // Insertar administrador de prueba
-    fun insertarAdminPrueba(context: Context) {
-        val dbHelper = DataBaseHelper(context)
-        dbHelper.insertarAdministrador(
-            dni = "99999999Z",
+        insertarAdministrador(
+            dni = "87654321Z",
             nombre = "Admin",
             apellidos = "Prueba",
             email = "admin@test.com",
             codAdministrador = 9999,
-            edad = 40,
-            direccion = "Dirección admin",
-            fechaNacimiento = "1983-01-01",
+            edad = 30,
+            direccion = "Calle Admin 456",
+            fechaNacimiento = "1993-01-01",
             contrasena = "admin123"
         )
     }
@@ -289,7 +290,5 @@ class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpen
         val dbHelper = DataBaseHelper(context)  // Pasamos el contexto recibido
         return dbHelper.validarAdministrador(dni, contrasena, Cod_Administrador)
     }
-
-
 
 }
