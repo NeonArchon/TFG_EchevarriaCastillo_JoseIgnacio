@@ -2,6 +2,7 @@ package com.example.tfg_planeta_maqueta
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -33,50 +34,34 @@ class MainActivity : AppCompatActivity() {
         // Inicialización de la base de datos
         dbHelper = DataBaseHelper(this)
 
-        // Insertar datos de prueba (solo para desarrollo)
-        insertarDatosPrueba()
 
-        // Configurar listeners
-        configurarListeners()
-    }
-
-    private fun insertarDatosPrueba() {
-        // Usuario de prueba
-        dbHelper.insertarUsuario(
-            dni = "usuario@test.com", // Usamos el email como DNI para este caso
-            nombre = "Usuario",
-            apellidos = "Prueba",
-            edad = 25,
-            direccion = "Calle Prueba 123",
-            fechaNacimiento = "1998-01-01",
-            contrasena = "123456"
-        )
-
-        // Administrador de prueba
-        dbHelper.insertarAdministrador(
-            dni = "admin@test.com",
-            nombre = "Admin",
-            apellidos = "Prueba",
-            codAdministrador = 9999,
-            edad = 30,
-            direccion = "Calle Admin 456",
-            fechaNacimiento = "1993-01-01",
-            contrasena = "admin123"
-        )
-    }
+    // Configurar listeners
+    configurarListeners()
+}
 
     private fun configurarListeners() {
         // Login de usuario normal
         botonUsuario.setOnClickListener {
-            val email = emailEditText.text.toString().trim()
-            val contrasena = contrasenaEditText.text.toString().trim()
+            try {
+                val email = emailEditText.text.toString().trim()
+                val contrasena = contrasenaEditText.text.toString().trim()
 
-            if (validarCamposUsuario(email, contrasena)) {
-                if (dbHelper.validarUsuario(email, contrasena)) {
-                    iniciarSesionUsuario()
-                } else {
-                    mostrarError("Credenciales incorrectas")
+                if (email.isEmpty() || contrasena.isEmpty()) {
+                    Toast.makeText(this, "Por favor complete todos los campos", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
                 }
+
+                val esValido = dbHelper.validarUsuario(email, contrasena)
+
+                if (esValido) {
+                    Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
+                    // startActivity(Intent(this, PantallaUsuario::class.java))
+                } else {
+                    Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                Toast.makeText(this, "Error al validar credenciales", Toast.LENGTH_SHORT).show()
+                Log.e("MainActivity", "Error en login", e)
             }
         }
 
@@ -84,12 +69,12 @@ class MainActivity : AppCompatActivity() {
         botonAdmin.setOnClickListener {
             val email = emailEditText.text.toString().trim()
             val contrasena = contrasenaEditText.text.toString().trim()
-            val codigoAdmin = codigoAdminEditText.text.toString().trim()
+            val Cod_Administrador = codigoAdminEditText.text.toString().trim()
 
-            if (validarCamposAdmin(email, contrasena, codigoAdmin)) {
+            if (validarCamposAdmin(email, contrasena, Cod_Administrador)) {
                 try {
-                    val codigo = codigoAdmin.toInt()
-                    if (dbHelper.validarAdministrador(email, contrasena, codigo)) {
+                    val codigo = Cod_Administrador.toInt()
+                    if (dbHelper.validarAdministrador(email, contrasena, Cod_Administrador)) {
                         iniciarSesionAdmin()
                     } else {
                         mostrarError("Credenciales o código incorrectos")

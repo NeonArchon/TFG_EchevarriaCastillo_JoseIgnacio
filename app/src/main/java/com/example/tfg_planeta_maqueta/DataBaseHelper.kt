@@ -7,43 +7,44 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 
-class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpenHelper (context, if (useMemory) null else "Planeta_Maqueta.db", null,2){
+class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpenHelper (context, if (useMemory) null else "Planeta_Maqueta.db", null,8){
 
     override fun onCreate(db: SQLiteDatabase?) {
         db?.let { database ->
             try {
                 // Ejecutar las sentencias SQL dentro de una transacción
-                database.beginTransaction()
 
                 // Tabla de usuarios
                 database.execSQL("""
                     CREATE TABLE Usuario (
-                        DNI TEXT,
-                        Nombre TEXT NOT NULL,
-                        Apellidos TEXT NOT NULL,
-                        ID_Usuario integer PRIMARY KEY AUTOINCREMENT,
-                        Edad INTEGER,
-                        Direccion TEXT,
-                        Fecha_Nacimiento TEXT,
-                        Contrasena TEXT NOT NULL
+                    DNI TEXT,
+                    Nombre TEXT NOT NULL,
+                    Apellidos TEXT NOT NULL,
+                    Email TEXT UNIQUE NOT NULL,
+                    ID_Usuario integer PRIMARY KEY AUTOINCREMENT,
+                    Edad INTEGER,
+                    Direccion TEXT,
+                    Fecha_Nacimiento TEXT,
+                    Contrasena TEXT NOT NULL
                         )
                 """.trimIndent())
 
                 // Tabla de administradores
                 database.execSQL("""
-                     CREATE TABLE Administrador (
-                        DNI TEXT PRIMARY KEY,
-                        Nombre TEXT NOT NULL,
-                        Apellidos TEXT NOT NULL,
-                        Cod_Administrador INTEGER ,
-                        Edad INTEGER,
-                        Direccion TEXT,
-                        Fecha_Nacimiento TEXT,
-                        Contrasena TEXT NOT NULL
+                    CREATE TABLE Administrador (
+                    DNI TEXT PRIMARY KEY,
+                    Nombre TEXT NOT NULL,
+                    Apellidos TEXT NOT NULL,
+                    Email TEXT UNIQUE NOT NULL,
+                    Cod_Administrador INTEGER,
+                    Edad INTEGER,
+                    Direccion TEXT,
+                    Fecha_Nacimiento TEXT,
+                    Contrasena TEXT NOT NULL
                     )
                 """.trimIndent())
 
-                // Tabla de Productos (new table)
+                // Tabla de Productos
                 database.execSQL("""
                     CREATE TABLE Productos (
                         Id_Producto INTEGER PRIMARY KEY,
@@ -83,13 +84,9 @@ class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpen
                 """.trimIndent())
 
                 // Marcar la transacción como exitosa
-                database.setTransactionSuccessful()
                 Log.i("DataBaseHelper", "Tablas creadas exitosamente")
             } catch (e: Exception) {
                 Log.i("DatabaseHelper", "Error al crear tablas: ${e.message}")
-            } finally {
-                // Finalizar la transacción
-                database.endTransaction()
             }
 
         }
@@ -101,18 +98,16 @@ class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpen
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db?.let { database ->
             try {
-                database.beginTransaction()
+
                 database.execSQL("DROP TABLE IF EXISTS Administrador")
                 database.execSQL("DROP TABLE IF EXISTS Usuario")
                 database.execSQL("DROP TABLE IF EXISTS Persona")
                 database.execSQL("DROP TABLE IF EXISTS Compra")
                 database.execSQL("DROP TABLE IF EXISTS Vende")
-                database.setTransactionSuccessful()
+
                 onCreate(database)
             } catch (e: Exception) {
                 Log.e("DatabaseHelper", "Error en onUpgrade: ${e.message}")
-            } finally {
-                database.endTransaction()
             }
         }
     }
@@ -122,6 +117,7 @@ class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpen
         dni: String,
         nombre: String,
         apellidos: String,
+        email: String,
         edad: Int?,
         direccion: String?,
         fechaNacimiento: String?,
@@ -132,6 +128,7 @@ class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpen
             put("DNI", dni)
             put("Nombre", nombre)
             put("Apellidos", apellidos)
+            put("Email", email)
             put("Edad", edad)
             put("Direccion", direccion)
             put("Fecha_Nacimiento", fechaNacimiento)
@@ -145,6 +142,7 @@ class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpen
         dni: String,
         nombre: String,
         apellidos: String,
+        email: String,
         codAdministrador: Int,
         edad: Int?,
         direccion: String?,
@@ -156,6 +154,7 @@ class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpen
             put("DNI", dni)
             put("Nombre", nombre)
             put("Apellidos", apellidos)
+            put("Email", email)
             put("Cod_Administrador", codAdministrador)
             put("Edad", edad)
             put("Direccion", direccion)
@@ -188,31 +187,36 @@ class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpen
         return db.insert("Productos", null, values)
     }
 
-    fun validarUsuario(email: String, contrasena: String): Boolean {
+    // Validar usuario
+    fun validarUsuario(email: String, contraseña: String): Boolean {
         val db = this.readableDatabase
-        val query = """
-        SELECT * FROM Usuario 
-        WHERE DNI = ? AND Contrasena = ?
-    """.trimIndent()
-
-        val cursor = db.rawQuery(query, arrayOf(email, contrasena))
-        val result = cursor.count > 0
-        cursor.close()
-        return result
+        var cursor: Cursor? = null
+        return try {
+            val query = "SELECT * FROM Usuario WHERE Email = ? AND Contrasena = ?"
+            cursor = db.rawQuery(query, arrayOf(email, contraseña))
+            cursor.count > 0
+        } finally {
+            cursor?.close()
+            db.close()
+        }
     }
 
-    fun validarAdministrador(email: String, contrasena: String, codAdmin: Int): Boolean {
-        val db = this.readableDatabase
-        val query = """
-        SELECT * FROM Administrador 
-        WHERE DNI = ? AND Contrasena = ? AND Cod_Administrador = ?
-    """.trimIndent()
 
-        val cursor = db.rawQuery(query, arrayOf(email, contrasena, codAdmin.toString()))
-        val result = cursor.count > 0
-        cursor.close()
-        return result
+    //validar administrador
+    fun validarAdministrador(email: String, contraseña: String, codigoAdmin: String): Boolean {
+        val db = this.readableDatabase
+        var cursor: Cursor? = null
+        return try {
+            val query = "SELECT * FROM Administrador WHERE Email = ? AND Contrasena = ? AND Cod_Administrador = ?"
+            cursor = db.rawQuery(query, arrayOf(email, contraseña, codigoAdmin))
+            cursor.count > 0
+        } finally {
+            cursor?.close()
+            db.close()
+        }
     }
+
+
 
     // Función para obtener el ID de usuario basado en DNI
     fun obtenerIdUsuario(dni: String): Int {
@@ -229,11 +233,12 @@ class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpen
 
     // Insertar usuario de prueba
     fun insertarUsuarioPrueba(context: Context) {
-        val dbHelper = DataBaseHelper(context) // Usar el contexto recibido
+        val dbHelper = DataBaseHelper(context)
         dbHelper.insertarUsuario(
             dni = "11111111A",
             nombre = "Usuario",
             apellidos = "Prueba",
+            email = "usuario@test.com",
             edad = 25,
             direccion = "Dirección prueba",
             fechaNacimiento = "1998-01-01",
@@ -243,17 +248,34 @@ class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpen
 
     // Insertar administrador de prueba
     fun insertarAdminPrueba(context: Context) {
-        val dbHelper = DataBaseHelper(context) // Usar el contexto recibido
+        val dbHelper = DataBaseHelper(context)
         dbHelper.insertarAdministrador(
             dni = "99999999Z",
             nombre = "Admin",
             apellidos = "Prueba",
+            email = "admin@test.com",
             codAdministrador = 9999,
             edad = 40,
             direccion = "Dirección admin",
             fechaNacimiento = "1983-01-01",
             contrasena = "admin123"
         )
+    }
+
+    // Obtener usuario por Email
+    fun obtenerUsuarioPorEmail(email: String): Cursor? {
+        val db = this.readableDatabase
+        return db.rawQuery("SELECT * FROM Usuario WHERE Email = ?", arrayOf(email))
+    }
+
+    // Verificar si un Email ya existe
+    fun existeEmail(email: String, esAdmin: Boolean = false): Boolean {
+        val db = this.readableDatabase
+        val tabla = if (esAdmin) "Administrador" else "Usuario"
+        val cursor = db.rawQuery("SELECT 1 FROM $tabla WHERE Email = ?", arrayOf(email))
+        val existe = cursor.count > 0
+        cursor.close()
+        return existe
     }
 
     // Verificar si un usuario existe
@@ -263,9 +285,9 @@ class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpen
     }
 
     // Verificar si un administrador existe
-    fun verificarAdministrador(context: Context, dni: String, contrasena: String, codAdmin: Int): Boolean {
+    fun verificarAdministrador(context: Context, dni: String, contrasena: String, Cod_Administrador: String): Boolean {
         val dbHelper = DataBaseHelper(context)  // Pasamos el contexto recibido
-        return dbHelper.validarAdministrador(dni, contrasena, codAdmin)
+        return dbHelper.validarAdministrador(dni, contrasena, Cod_Administrador)
     }
 
 
