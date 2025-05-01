@@ -55,6 +55,7 @@ class MainActivity : AppCompatActivity() {
 
                 if (esValido) {
                     Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
+                    iniciarSesionUsuario()
                     // startActivity(Intent(this, PantallaUsuario::class.java))
                 } else {
                     Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()

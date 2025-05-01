@@ -21,6 +21,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".PantallaUsuario"/>
+
+        <activity android:name=".PantallaAdministrador"/>
+
+        <activity android:name=".PantallaRegistro"/>
     </application>
 
 </manifest>
