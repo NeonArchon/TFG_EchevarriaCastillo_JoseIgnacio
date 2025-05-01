@@ -14,6 +14,7 @@ class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpen
             try {
                 // Ejecutar las sentencias SQL dentro de una transacción
 
+
                 // Tabla de usuarios
                 database.execSQL("""
                     CREATE TABLE Usuario (
@@ -58,7 +59,7 @@ class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpen
                     )
                 """.trimIndent())
 
-                // Tabla de Compra (new table)
+                // Tabla de Compra
                 database.execSQL("""
                     CREATE TABLE Compra (
                         Id_Producto INTEGER,
@@ -71,7 +72,7 @@ class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpen
                     )
                 """.trimIndent())
 
-                // Tabla de Vende (new table)
+                // Tabla de Vende
                 database.execSQL("""
                     CREATE TABLE Vende (
                         Id_Vendedor INTEGER,
@@ -83,6 +84,7 @@ class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpen
                     )
                 """.trimIndent())
 
+                insertarDatosPrueba(database)
 
             }catch(e: Exception){
                 Log.i("DataBaseHelper", "FALLO INSERCCION");
@@ -107,7 +109,6 @@ class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpen
                 database.execSQL("DROP TABLE IF EXISTS Vende")
 
                 onCreate(database)
-                insertarDatosPrueba();
 
             } catch (e: Exception) {
                 Log.e("DatabaseHelper", "Error en onUpgrade: ${e.message}")
@@ -137,7 +138,9 @@ class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpen
             put("Fecha_Nacimiento", fechaNacimiento)
             put("Contrasena", contrasena)
         }
-        return db.insert("Usuario", null, values)
+        val result = db.insert("Usuario", null, values)
+        db.close() // Cierra la conexión
+        return result
     }
 
 
@@ -166,7 +169,9 @@ class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpen
             put("Fecha_Nacimiento", fechaNacimiento)
             put("Contrasena", contrasena)
         }
-        return db.insert("Administrador", null, values)
+        val result = db.insert("Administrador", null, values)
+        db.close() // Cierra la conexión
+        return result
     }
 
     // Insertar un nuevo producto
@@ -189,7 +194,9 @@ class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpen
             put("Ofertas", ofertas)
             put("Fotos", fotos)
         }
-        return db.insert("Productos", null, values)
+        val result = db.insert("Productos", null, values)
+        db.close() // Cierra la conexión
+        return result
     }
 
     // Validar usuario
@@ -237,30 +244,41 @@ class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpen
 
 
     // Insertar usuario y administrador de prueba
-    fun insertarDatosPrueba( ) {
-        insertarUsuario(
+    private fun insertarDatosPrueba(db: SQLiteDatabase) {
+        try {
+            db.beginTransaction()
 
-            dni = "12345678A",
-            nombre = "Usuario",
-            apellidos = "Prueba",
-            email = "usuario@test.com",
-            edad = 25,
-            direccion = "Calle Prueba 123",
-            fechaNacimiento = "1998-01-01",
-            contrasena = "password123"
-        )
+            val valuesUsuario = ContentValues().apply {
+                put("DNI", "12345678A")
+                put("Nombre", "Usuario")
+                put("Apellidos", "Prueba")
+                put("Email", "usuario@test.com")
+                put("Edad", 25)
+                put("Direccion", "Calle Prueba 123")
+                put("Fecha_Nacimiento", "1998-01-01")
+                put("Contrasena", "password123")
+            }
+            db.insert("Usuario", null, valuesUsuario)
 
-        insertarAdministrador(
-            dni = "87654321Z",
-            nombre = "Admin",
-            apellidos = "Prueba",
-            email = "admin@test.com",
-            codAdministrador = 9999,
-            edad = 30,
-            direccion = "Calle Admin 456",
-            fechaNacimiento = "1993-01-01",
-            contrasena = "admin123"
-        )
+            val valuesAdmin = ContentValues().apply {
+                put("DNI", "87654321Z")
+                put("Nombre", "Admin")
+                put("Apellidos", "Prueba")
+                put("Email", "admin@test.com")
+                put("Cod_Administrador", 9999)
+                put("Edad", 30)
+                put("Direccion", "Calle Admin 456")
+                put("Fecha_Nacimiento", "1993-01-01")
+                put("Contrasena", "admin123")
+            }
+            db.insert("Administrador", null, valuesAdmin)
+
+            db.setTransactionSuccessful()
+        } catch (e: Exception) {
+            Log.e("DatabaseHelper", "Error insertando datos de prueba: ${e.message}")
+        } finally {
+            db.endTransaction()
+        }
     }
 
     // Obtener usuario por Email
