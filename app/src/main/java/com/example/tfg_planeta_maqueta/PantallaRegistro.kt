@@ -60,10 +60,9 @@ class PantallaRegistro : AppCompatActivity() {
 
             // Aquí iría la lógica de inserción en la base de datos
             val db = DataBaseHelper(this)
-
             val esAdmin = adminCodigoTexto.isNotEmpty() // si hay código, es admin
 
-            val resultado: Long = if (esAdmin) {
+            val exito = if (esAdmin) {  // Cambiamos el nombre a "exito" para mayor claridad
                 db.insertarAdministrador(
                     dniTexto,
                     nombreTexto,
@@ -90,7 +89,7 @@ class PantallaRegistro : AppCompatActivity() {
                 )
             }
 
-            if (resultado != -1L) {  // -1 indica error en SQLite
+            if (exito) {  // Ahora trabajamos con Boolean directamente
                 Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
