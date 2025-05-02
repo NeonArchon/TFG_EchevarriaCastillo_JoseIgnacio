@@ -27,9 +27,9 @@
     <View
         android:id="@+id/viewfondo"
         android:layout_width="420dp"
-        android:layout_height="630dp"
+        android:layout_height="640dp"
         android:background="@drawable/borde_redondo_view"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,6 +68,7 @@
                 <!-- Campos de texto -->
 
                 <EditText
+                    android:id="@+id/editTextDNI"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="DNI *"
@@ -76,6 +77,7 @@
                     android:padding="12dp" />
 
                 <EditText
+                    android:id="@+id/editTextNombre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Nombre *"
@@ -84,6 +86,7 @@
                     android:padding="12dp" />
 
                 <EditText
+                    android:id="@+id/editTextApellidos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Apellidos *"
@@ -92,6 +95,7 @@
                     android:padding="12dp" />
 
                 <EditText
+                    android:id="@+id/editTextUsuario"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Nombre de Usuario *"
@@ -100,6 +104,7 @@
                     android:padding="12dp" />
 
                 <EditText
+                    android:id="@+id/editTextEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="E-mail *"
@@ -108,6 +113,7 @@
                     android:padding="12dp" />
 
                 <EditText
+                    android:id="@+id/editTextFechaNacimiento"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Fecha de Nacimiento *"
@@ -116,14 +122,16 @@
                     android:padding="12dp" />
 
                 <EditText
+                    android:id="@+id/editTextDireccion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Direccion"
-                    android:inputType="textPassword"
+                    android:inputType="textPostalAddress"
                     android:minHeight="48dp"
                     android:padding="12dp" />
 
                 <EditText
+                    android:id="@+id/editTextContrasena"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Contraseña"
@@ -132,12 +140,14 @@
                     android:padding="12dp" />
 
                 <EditText
+                    android:id="@+id/editTextCodigoAdmin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Codigo Admin (solo si aplica)"
                     android:inputType="text"
                     android:minHeight="48dp"
                     android:padding="12dp" />
+
 
                 <!-- RadioGroup Sexo -->
                 <TextView
@@ -194,8 +204,6 @@
             </LinearLayout>
         </ScrollView>
 
-
     </androidx.cardview.widget.CardView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

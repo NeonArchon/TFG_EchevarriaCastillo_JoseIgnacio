@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 
-class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpenHelper (context, if (useMemory) null else "Planeta_Maqueta.db", null,8){
+class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpenHelper (context, if (useMemory) null else "Planeta_Maqueta.db", null,9){
 
     override fun onCreate(db: SQLiteDatabase?) {
         db?.let { database ->
@@ -22,11 +22,13 @@ class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpen
                     Nombre TEXT NOT NULL,
                     Apellidos TEXT NOT NULL,
                     Email TEXT UNIQUE NOT NULL,
+                    Usuario TEXT UNIQUE NOT NULL,
                     ID_Usuario integer PRIMARY KEY AUTOINCREMENT,
                     Edad INTEGER,
                     Direccion TEXT,
                     Fecha_Nacimiento TEXT,
-                    Contrasena TEXT NOT NULL
+                    Contrasena TEXT NOT NULL,
+                    Sexo TEXT
                         )
                 """.trimIndent())
 
@@ -37,11 +39,13 @@ class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpen
                     Nombre TEXT NOT NULL,
                     Apellidos TEXT NOT NULL,
                     Email TEXT UNIQUE NOT NULL,
+                    Usuario TEXT UNIQUE NOT NULL,
                     Cod_Administrador INTEGER,
                     Edad INTEGER,
                     Direccion TEXT,
                     Fecha_Nacimiento TEXT,
-                    Contrasena TEXT NOT NULL
+                    Contrasena TEXT NOT NULL,
+                    Sexo TEXT
                     )
                 """.trimIndent())
 
@@ -121,26 +125,28 @@ class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpen
         dni: String,
         nombre: String,
         apellidos: String,
+        usuario: String,
         email: String,
-        edad: Int?,
-        direccion: String?,
         fechaNacimiento: String?,
-        contrasena: String
-    ): Long {
+        direccion: String?,
+        contrasena: String,
+        sexo: String
+    ): Boolean  {
         val db = writableDatabase
         val values = ContentValues().apply {
             put("DNI", dni)
             put("Nombre", nombre)
             put("Apellidos", apellidos)
+            put("Usuario", usuario)
             put("Email", email)
-            put("Edad", edad)
             put("Direccion", direccion)
             put("Fecha_Nacimiento", fechaNacimiento)
             put("Contrasena", contrasena)
+            put("Sexo", sexo)
         }
         val result = db.insert("Usuario", null, values)
         db.close() // Cierra la conexión
-        return result
+        return result != -1L
     }
 
 
@@ -150,29 +156,32 @@ class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpen
         dni: String,
         nombre: String,
         apellidos: String,
+        usuario: String,
         email: String,
-        codAdministrador: Int,
-        edad: Int?,
-        direccion: String?,
         fechaNacimiento: String?,
-        contrasena: String
-    ): Long {
+        direccion: String?,
+        contrasena: String,
+        sexo: String,
+        codAdministrador: String
+    ): Boolean  {
         val db = writableDatabase
         val values = ContentValues().apply {
             put("DNI", dni)
             put("Nombre", nombre)
             put("Apellidos", apellidos)
+            put("Usuario", usuario)
             put("Email", email)
-            put("Cod_Administrador", codAdministrador)
-            put("Edad", edad)
             put("Direccion", direccion)
             put("Fecha_Nacimiento", fechaNacimiento)
             put("Contrasena", contrasena)
+            put("Sexo", sexo)
+            put("Cod_Administrador", codAdministrador.toIntOrNull() ?: 0)
         }
         val result = db.insert("Administrador", null, values)
         db.close() // Cierra la conexión
-        return result
+        return result != -1L
     }
+
 
     // Insertar un nuevo producto
     fun insertarProducto(
