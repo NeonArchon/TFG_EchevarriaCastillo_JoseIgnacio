@@ -22,11 +22,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".PantallaUsuario"/>
+        <activity android:name="com.example.tfg_planeta_maqueta.PantallaUsuario"/>
 
-        <activity android:name=".PantallaAdministrador"/>
+        <activity android:name="com.example.tfg_planeta_maqueta.PantallaAdministrador"/>
 
-        <activity android:name=".PantallaRegistro"/>
+        <activity android:name="com.example.tfg_planeta_maqueta.PantallaRegistro"/>
     </application>
 
 </manifest>
