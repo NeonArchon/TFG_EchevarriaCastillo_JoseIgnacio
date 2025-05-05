@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Minis"
+        android:id="botonMinis"/>
+    <item android:title="Pinturas"
+        android:id="botonPinturas"/>
+    <item android:title="Pinceles"
+        android:id="botonPinceles"/>
+    <item android:title="Usuarios"
+        android:id="botonUsuarios"/>
+    <item android:title="Otros"
+        android:id="botonOtros"/>
+</menu>
