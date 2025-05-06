@@ -62,9 +62,9 @@
 
                 <!-- Título del producto -->
                 <TextView
+                    android:id="@+id/tituloProducto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Titulo"
                     android:textColor="#FFFFFF"
                     android:textStyle="bold"
                     android:textSize="20sp"
@@ -74,16 +74,30 @@
 
                 <!-- Imagen del producto -->
                 <ImageView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/imagenProducto"
+                    android:layout_width="200dp"
                     android:layout_height="200dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="" />
+                    android:scaleType="fitCenter"
+                    android:contentDescription="Imagen del producto"
+                    android:adjustViewBounds="true"/>
+
+                <!-- Oferta (si existe) -->
+                <TextView
+                    android:id="@+id/ofertaProducto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFD700"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:layout_gravity="center_horizontal"
+                    android:visibility="gone"/>
 
                 <!-- Descripción -->
                 <TextView
+                    android:id="@+id/descripcionProducto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Descripcion: "
                     android:textColor="#FFFFFF"
                     android:textAlignment="center"
                     android:padding="12dp" />
@@ -108,34 +122,30 @@
                     android:orientation="vertical"
                     android:layout_marginTop="8dp">
 
+                    <TextView
+                        android:id="@+id/tipoProducto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="• Tipo: "
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/precioProducto"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="• Precio: 50 €    1▼"
+                        android:text="• Precio: "
+                        android:textColor="@color/white"
                         android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/numeroObjetosProducto"
+                        android:id="@+id/stockProducto"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="• Número de objetos: 1"
+                        android:text="• Stock disponible: "
+                        android:textColor="@color/white"
                         android:textSize="16sp" />
 
-                    <TextView
-                        android:id="@+id/dimensionesProducto"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="• Dimensiones: 15x20x7 cm"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/pesoProducto"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="• Peso: 350 g"
-                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <!-- Botones -->
@@ -144,6 +154,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginTop="30dp"
+                    android:background="@drawable/borde_redondo_view"
                     android:weightSum="3"
                     android:gravity="center">
 
@@ -152,13 +163,12 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:gravity="center"
-                        >
+                        android:gravity="center">
 
                         <ImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:src="@drawable/" />
+                            android:src="@drawable/comprar"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -173,8 +183,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:gravity="center"
-                        >
+                        android:gravity="center">
 
                         <ImageView
                             android:layout_width="40dp"
@@ -194,8 +203,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:gravity="center"
-                        >
+                        android:gravity="center">
 
                         <ImageView
                             android:layout_width="40dp"
@@ -209,7 +217,6 @@
                             android:textColor="#000000"
                             android:textStyle="bold" />
                     </LinearLayout>
-
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
