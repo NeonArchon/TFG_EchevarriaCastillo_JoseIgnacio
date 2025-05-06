@@ -30,6 +30,8 @@
 
         <activity android:name="com.example.tfg_planeta_maqueta.PantallaTienda"/>
 
+
+
     </application>
 
 </manifest>
