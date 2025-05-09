@@ -9,6 +9,7 @@
     android:background="#50DAF9"
     tools:context=".MainActivity">
 
+    <!-- titulo -->
     <TextView
         android:id="@+id/NomnreAap"
         android:layout_width="wrap_content"
@@ -48,22 +49,6 @@
         app:layout_constraintVertical_bias="0.5">
 
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:fontFamily="sans-serif-medium"
-            android:gravity="center"
-            android:letterSpacing="0.05"
-            android:padding="10dp"
-            android:text="Seleccione un método de pago"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            android:textStyle="bold"
-
-            />
-
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -74,52 +59,52 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- Título -->
+                <!-- Título dentro del CardView -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Seleccione método de pago"
-                    android:textColor="@color/white"
+                    android:textColor="@android:color/white"
                     android:textSize="24sp"
                     android:gravity="center"
                     android:textStyle="bold"
                     android:paddingBottom="16dp"/>
 
-                <!-- Selector de método de pago (Dropdown) -->
+                <!-- Dropdown de métodos de pago -->
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Método de pago"
-                    app:boxStrokeColor="@color/white"
-                    app:hintTextColor="@color/white"
-                    app:endIconTint="@color/white">
+                    app:boxStrokeColor="@android:color/white"
+                    app:hintTextColor="@android:color/white"
+                    app:endIconTint="@android:color/white">
 
                     <AutoCompleteTextView
                         android:id="@+id/metodoPagoDropdown"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
+                        android:textColor="@android:color/white"
                         android:inputType="none"
-                        android:backgroundTint="@color/white"/>
+                        android:backgroundTint="@android:color/white"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Contenedor dinámico para formularios -->
+                <!-- Contenedor donde se inflarán los formularios -->
                 <FrameLayout
                     android:id="@+id/formContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"/>
+                    android:layout_marginTop="24dp" />
 
-                <!-- Botón de confirmación -->
+                <!-- Botón de pagar -->
                 <Button
                     android:id="@+id/btnConfirmarPago"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Confirmar pago"
+                    android:text="Pagar"
                     android:layout_marginTop="24dp"
                     android:backgroundTint="#DA2C49"
-                    android:textColor="@color/white"
+                    android:textColor="@android:color/white"
                     android:textSize="18sp"
                     android:elevation="4dp"/>
             </LinearLayout>
