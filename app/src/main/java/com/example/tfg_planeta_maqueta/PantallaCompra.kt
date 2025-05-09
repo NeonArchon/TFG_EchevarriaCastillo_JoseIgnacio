@@ -25,7 +25,7 @@ class PantallaCompra : AppCompatActivity() {
             val seleccionado = metodosPago[position]
             val layoutId = when (seleccionado) {
                 "Bizzum" -> R.layout.formulario_bizzum
-                "Transferencia" -> R.layout.formulario_transferencia
+                "Transferencia" -> R.layout.formulario_tranferencia
                 "Tarjeta bancaria" -> R.layout.formulario_tarjeta
                 else -> null
             }
@@ -45,5 +45,3 @@ class PantallaCompra : AppCompatActivity() {
     }
 
     }
-
-}
