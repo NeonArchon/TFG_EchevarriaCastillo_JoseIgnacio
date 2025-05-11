@@ -58,6 +58,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:hint="Nombre del titular">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -70,6 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="IBAN (número de cuenta)"
+                android:background="@color/white"
                 android:layout_marginTop="12dp">
 
                 <com.google.android.material.textfield.TextInputEditText
