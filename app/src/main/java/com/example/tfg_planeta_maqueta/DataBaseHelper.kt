@@ -88,6 +88,52 @@ class DataBaseHelper (context: Context, useMemory: Boolean = false) : SQLiteOpen
                     )
                 """.trimIndent())
 
+                //tabla para guardar compras
+                database.execSQL("""
+                    CREATE TABLE Compras (
+                        id_compra INT PRIMARY KEY AUTOINCREMENT,
+                        id_usuario INT NOT NULL,
+                        fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                        total DECIMAL(10,2) NOT NULL,
+                        metodo_pago VARCHAR(20) NOT NULL,
+                        estado_pago VARCHAR(20) DEFAULT 'pendiente',
+                        FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario)
+                    );
+                """.trimIndent())
+
+                //tabla de los datos en los metodos pago
+                database.execSQL("""
+                        CREATE TABLE DatosPago (
+                        id_pago INT PRIMARY KEY AUTOINCREMENT,
+                        id_compra INT NOT NULL,
+                        metodo_pago VARCHAR(20) NOT NULL,
+                    
+                        -- Campos opcionales dependiendo del método
+                        telefono_bizum VARCHAR(15),
+                        titular_transferencia VARCHAR(100),
+                        iban_transferencia VARCHAR(34),
+                        numero_tarjeta VARCHAR(20),
+                        vencimiento_tarjeta VARCHAR(7),
+                        cvv_tarjeta VARCHAR(4),
+                    
+                        FOREIGN KEY (id_compra) REFERENCES Compras(id_compra)
+                        );
+                """.trimIndent())
+
+                //tabla de detalles de la compra (para compras individuales)
+                database.execSQL("""
+                        CREATE TABLE DetalleCompra (
+                            id_detalle INT PRIMARY KEY AUTOINCREMENT,
+                            id_compra INT NOT NULL,
+                            id_producto INT NOT NULL,
+                            cantidad INT NOT NULL,
+                            precio_unitario DECIMAL(10,2) NOT NULL,
+
+                            FOREIGN KEY (id_compra) REFERENCES Compras(id_compra),
+                            FOREIGN KEY (id_producto) REFERENCES Productos(id_producto)
+                        );
+                """.trimIndent())
+
                 insertarDatosPrueba(database)
 
             }catch(e: Exception){
